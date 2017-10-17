@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SkiaRate
 {
-    public abstract class Rating
+    public class Rating
     {
 
         /// <summary>
@@ -18,16 +18,39 @@ namespace SkiaRate
         public SKColor OffColor { get; set; } = SKColors.Transparent;
         public SKColor OffOutlineColor { get; set; } = SKColors.Black;
 
-        public SKPath Path { get; set; }
+        public string Path { get; set; }
         public int Count { get; set; } = 5;
         public RatingType RatingType { get; set; } = RatingType.Full;
 
         public void Draw(SKCanvas canvas, int width, int height)
         {
             canvas.Clear(this.BackgroundColor);
-            this.DrawRating(canvas, width, height);
+            var itemsize = CalculateItemSize(width, height);
+            var path = SKPath.ParseSvgPathData(this.Path);
+            var scale = itemsize / path.Bounds.Width;
+            canvas.Scale(scale);
+
+            using (var strokePaint = new SKPaint
+            {
+                Style = SKPaintStyle.Stroke,
+                Color = this.OnColor,
+                StrokeWidth = 1,
+                StrokeJoin = SKStrokeJoin.Round
+            })
+            using (var fillPaint = new SKPaint
+            {
+                Style = SKPaintStyle.Fill,
+                Color = this.OnColor,
+            })
+            {
+                for (int i = 0; i < this.Count; i++)
+                {
+                    canvas.DrawPath(path, fillPaint);
+                    canvas.DrawPath(path, strokePaint);
+                    canvas.Translate((itemsize + this.Spacing) / scale, 0);
+                }
+            }
         }
-        public abstract void DrawRating(SKCanvas canvas, int width, int height);
         protected float CalculateItemSize(int width, int height)
         {
             return Math.Min(height, (width - (this.Count * this.Spacing)) / this.Count);
