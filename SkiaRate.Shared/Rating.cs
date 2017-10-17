@@ -26,34 +26,46 @@ namespace SkiaRate
         {
             canvas.Clear(this.BackgroundColor);
             var itemsize = CalculateItemSize(width, height);
+
             var path = SKPath.ParseSvgPathData(this.Path);
-            var scale = itemsize / path.Bounds.Width;
-            canvas.Scale(scale);
+            var scaleX = (itemsize / (path.Bounds.Width));
+
+            var scaleY = itemsize / (path.Bounds.Height);
+            scaleY = (itemsize - scaleY) / (path.Bounds.Height);
+
+
+            canvas.Scale(scaleX, scaleY);
+            canvas.Translate(0.5f, 0.5f);
+            canvas.Translate(-path.Bounds.Left, 0);
+            canvas.Translate(0, -path.Bounds.Top);
+
 
             using (var strokePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 Color = this.OnColor,
                 StrokeWidth = 1,
-                StrokeJoin = SKStrokeJoin.Round
+                StrokeJoin = SKStrokeJoin.Round,
+                IsAntialias = true
             })
             using (var fillPaint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,
                 Color = this.OnColor,
+                IsAntialias = true
             })
             {
                 for (int i = 0; i < this.Count; i++)
                 {
                     canvas.DrawPath(path, fillPaint);
                     canvas.DrawPath(path, strokePaint);
-                    canvas.Translate((itemsize + this.Spacing) / scale, 0);
+                    canvas.Translate((itemsize + this.Spacing + scaleX) / scaleX, 0);
                 }
             }
         }
         protected float CalculateItemSize(int width, int height)
         {
-            return Math.Min(height, (width - (this.Count * this.Spacing)) / this.Count);
+            return Math.Min(height, ((width - (this.Count - 1) * this.Spacing)) / this.Count);
         }
     }
 }
