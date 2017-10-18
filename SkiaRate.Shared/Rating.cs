@@ -25,16 +25,19 @@ namespace SkiaRate
         public void Draw(SKCanvas canvas, int width, int height)
         {
             canvas.Clear(this.BackgroundColor);
-            var itemsize = CalculateItemSize(width, height);
 
             var path = SKPath.ParseSvgPathData(this.Path);
-            var scaleX = (itemsize / (path.Bounds.Width));
 
-            var scaleY = itemsize / (path.Bounds.Height);
-            scaleY = (itemsize - scaleY) / (path.Bounds.Height);
+            var itemsizeX = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
+            var scaleX = (itemsizeX / (path.Bounds.Width));
+            scaleX = (itemsizeX - scaleX) / path.Bounds.Width;
 
+            var scaleY = height / (path.Bounds.Height);
+            scaleY = (height - scaleY) / (path.Bounds.Height);
 
-            canvas.Scale(scaleX, scaleY);
+            var scale = Math.Min(scaleX , scaleY);
+
+            canvas.Scale(scale);
             canvas.Translate(0.5f, 0.5f);
             canvas.Translate(-path.Bounds.Left, 0);
             canvas.Translate(0, -path.Bounds.Top);
@@ -59,13 +62,9 @@ namespace SkiaRate
                 {
                     canvas.DrawPath(path, fillPaint);
                     canvas.DrawPath(path, strokePaint);
-                    canvas.Translate((itemsize + this.Spacing + scaleX) / scaleX, 0);
+                    canvas.Translate((itemsizeX + this.Spacing) / scale, 0);
                 }
             }
-        }
-        protected float CalculateItemSize(int width, int height)
-        {
-            return Math.Min(height, ((width - (this.Count - 1) * this.Spacing)) / this.Count);
         }
     }
 }
