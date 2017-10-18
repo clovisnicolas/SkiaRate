@@ -16,17 +16,17 @@ namespace SkiaRate
         public SKColor OnColor { get; set; } = SKColors.Gold;
         public SKColor OnOutlineColor { get; set; } = SKColors.Transparent;
         public SKColor OffColor { get; set; } = SKColors.Transparent;
-        public SKColor OffOutlineColor { get; set; } = SKColors.Black;
-        public float StrokeWidth { get; set; } = 1f;
-
+        public SKColor OffOutlineColor { get; set; } = SKColors.LightGray;
+        public float StrokeWidth { get; set; } = 0.1f;
         public string Path { get; set; }
         public int Count { get; set; } = 5;
         public RatingType RatingType { get; set; } = RatingType.Full;
+        public float Value { get; set; }
 
         public void Draw(SKCanvas canvas, int width, int height)
         {
             canvas.Clear(this.BackgroundColor);
-
+           
             var path = SKPath.ParseSvgPathData(this.Path);
 
             var itemsizeX = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
@@ -46,22 +46,45 @@ namespace SkiaRate
             using (var strokePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                Color = this.OnColor,
+                Color = this.OnOutlineColor,
                 StrokeWidth = this.StrokeWidth,
                 StrokeJoin = SKStrokeJoin.Round,
-                IsAntialias = true
+                IsAntialias = true,
             })
             using (var fillPaint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,
                 Color = this.OnColor,
-                IsAntialias = true
+                IsAntialias = true,
             })
             {
                 for (int i = 0; i < this.Count; i++)
                 {
-                    canvas.DrawPath(path, fillPaint);
-                    canvas.DrawPath(path, strokePaint);
+                    if (i < this.Value - 1) // Full
+                    {
+                        canvas.DrawPath(path, fillPaint);
+                        canvas.DrawPath(path, strokePaint);
+                    }
+                    else if (i < this.Value) //Half
+                    {
+                        using (var shader = SKShader.CreateLinearGradient(
+                            new SKPoint(path.Bounds.Left, path.Bounds.MidY),
+                            new SKPoint(path.Bounds.Right, path.Bounds.MidY),
+                            new SKColor[] { this.OnColor, SKColors.Transparent }, null, SKShaderTileMode.Clamp))
+                        {
+                            fillPaint.Shader = shader;
+                            canvas.DrawPath(path, fillPaint);
+
+                            strokePaint.Color = this.OffOutlineColor;
+                            canvas.DrawPath(path, strokePaint);
+                        }
+                    }
+                    else //Empty
+                    {
+                        strokePaint.Color = this.OffOutlineColor;
+                        canvas.DrawPath(path, strokePaint);
+                    }
+
                     canvas.Translate((itemsizeX + this.Spacing) / scale, 0);
                 }
             }

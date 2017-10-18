@@ -27,6 +27,8 @@ namespace SkiaRate.Samples.Uwp
             this.InitializeComponent();
 
             starRatingView.Rating = Sample.StarRating;
+            favRatingView.Rating = Sample.FavRating;
+            sqrRatingView.Rating = Sample.CircleRating;
 
         }
     }

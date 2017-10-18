@@ -7,8 +7,14 @@
     xmlns:skiarate="using:SkiaRate.Uwp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="#99B0A6">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
         <skiarate:RatingView x:Name="starRatingView" />
+        <skiarate:RatingView x:Name="favRatingView" Grid.Row="1"/>
+        <skiarate:RatingView x:Name="sqrRatingView" Grid.Row="2"/>
     </Grid>
 </Page>
