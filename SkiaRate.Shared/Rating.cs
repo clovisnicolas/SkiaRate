@@ -17,6 +17,7 @@ namespace SkiaRate
         public SKColor OnOutlineColor { get; set; } = SKColors.Transparent;
         public SKColor OffColor { get; set; } = SKColors.Transparent;
         public SKColor OffOutlineColor { get; set; } = SKColors.Black;
+        public float StrokeWidth { get; set; } = 1f;
 
         public string Path { get; set; }
         public int Count { get; set; } = 5;
@@ -30,24 +31,23 @@ namespace SkiaRate
 
             var itemsizeX = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
             var scaleX = (itemsizeX / (path.Bounds.Width));
-            scaleX = (itemsizeX - scaleX) / path.Bounds.Width;
+            scaleX = (itemsizeX - scaleX * this.StrokeWidth) / path.Bounds.Width;
 
             var scaleY = height / (path.Bounds.Height);
-            scaleY = (height - scaleY) / (path.Bounds.Height);
+            scaleY = (height - scaleY * this.StrokeWidth) / (path.Bounds.Height);
 
             var scale = Math.Min(scaleX , scaleY);
 
             canvas.Scale(scale);
-            canvas.Translate(0.5f, 0.5f);
+            canvas.Translate(this.StrokeWidth / 2, this.StrokeWidth / 2);
             canvas.Translate(-path.Bounds.Left, 0);
             canvas.Translate(0, -path.Bounds.Top);
-
 
             using (var strokePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 Color = this.OnColor,
-                StrokeWidth = 1,
+                StrokeWidth = this.StrokeWidth,
                 StrokeJoin = SKStrokeJoin.Round,
                 IsAntialias = true
             })
