@@ -23,18 +23,27 @@ namespace SkiaRate
         public RatingType RatingType { get; set; } = RatingType.Full;
         public float Value { get; set; }
 
+        public void SetValue(double x, double y)
+        {
+            this.Value = (float)x / (this.ItemWidth);
+        }
+
+        private float ItemWidth { get; set; }
+        private float ItemHeight { get; set; }
+
         public void Draw(SKCanvas canvas, int width, int height)
         {
             canvas.Clear(this.BackgroundColor);
            
             var path = SKPath.ParseSvgPathData(this.Path);
 
-            var itemsizeX = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
-            var scaleX = (itemsizeX / (path.Bounds.Width));
-            scaleX = (itemsizeX - scaleX * this.StrokeWidth) / path.Bounds.Width;
+            this.ItemWidth = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
+            var scaleX = (this.ItemWidth / (path.Bounds.Width));
+            scaleX = (this.ItemWidth - scaleX * this.StrokeWidth) / path.Bounds.Width;
 
-            var scaleY = height / (path.Bounds.Height);
-            scaleY = (height - scaleY * this.StrokeWidth) / (path.Bounds.Height);
+            this.ItemHeight = height;
+            var scaleY = this.ItemHeight / (path.Bounds.Height);
+            scaleY = (this.ItemHeight - scaleY * this.StrokeWidth) / (path.Bounds.Height);
 
             var scale = Math.Min(scaleX , scaleY);
 
@@ -85,7 +94,7 @@ namespace SkiaRate
                         canvas.DrawPath(path, strokePaint);
                     }
 
-                    canvas.Translate((itemsizeX + this.Spacing) / scale, 0);
+                    canvas.Translate((this.ItemWidth + this.Spacing) / scale, 0);
                 }
             }
         }

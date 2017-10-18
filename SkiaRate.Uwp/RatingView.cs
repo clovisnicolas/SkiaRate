@@ -10,6 +10,14 @@ namespace SkiaRate.Uwp
         public RatingView()
         {
             this.PaintSurface += OnPaintCanvas;
+            this.Tapped += RatingView_Tapped;
+        }
+
+        private void RatingView_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            var view = sender as UIElement;
+            this.Rating.SetValue(e.GetPosition(view).X, e.GetPosition(view).Y);
+            this.Invalidate();
         }
 
         public static readonly DependencyProperty RatingProperty = DependencyProperty.Register(nameof(Rating), typeof(RatingView), typeof(Rating), null);
