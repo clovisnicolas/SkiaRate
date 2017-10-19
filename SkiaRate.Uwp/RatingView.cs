@@ -2,6 +2,7 @@
 using SkiaSharp.Views.UWP;
 using Windows.UI.Xaml;
 using SkiaRate;
+using Windows.UI.Xaml.Input;
 
 namespace SkiaRate.Uwp
 {
@@ -11,6 +12,21 @@ namespace SkiaRate.Uwp
         {
             this.PaintSurface += OnPaintCanvas;
             this.Tapped += RatingView_Tapped;
+            this.ManipulationStarted += RatingView_ManipulationStarted;
+            this.ManipulationDelta += RatingView_ManipulationDelta;
+            this.ManipulationMode = ManipulationModes.TranslateX;
+        }
+
+        private void RatingView_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            this.Rating.SetValue(e.Position.X + e.Delta.Translation.X, e.Position.Y + e.Delta.Translation.Y);
+            this.Invalidate();
+        }
+
+        private void RatingView_ManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
+        {
+            this.Rating.SetValue(e.Position.X, e.Position.Y);
+            this.Invalidate();
         }
 
         private void RatingView_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)

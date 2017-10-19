@@ -25,7 +25,7 @@ namespace SkiaRate
 
         public void SetValue(double x, double y)
         {
-            this.Value = (float)x / (this.ItemWidth);
+            this.Value = (float) x / (this.ItemWidth);
         }
 
         private float ItemWidth { get; set; }
@@ -69,18 +69,22 @@ namespace SkiaRate
             {
                 for (int i = 0; i < this.Count; i++)
                 {
-                    if (i < this.Value - 1) // Full
+                    if (i <= this.Value - 1) // Full
                     {
                         canvas.DrawPath(path, fillPaint);
                         canvas.DrawPath(path, strokePaint);
                     }
                     else if (i < this.Value) //Half
                     {
+                        float filledPercentage = (float)(this.Value - Math.Truncate(this.Value));
+                        
+
                         using (var shader = SKShader.CreateLinearGradient(
                             new SKPoint(path.Bounds.Left, path.Bounds.MidY),
                             new SKPoint(path.Bounds.Right, path.Bounds.MidY),
-                            new SKColor[] { this.OnColor, SKColors.Transparent }, null, SKShaderTileMode.Clamp))
+                            new SKColor[] { this.OnColor, SKColors.Transparent }, new float[] {filledPercentage, 1-filledPercentage }, SKShaderTileMode.Clamp))
                         {
+                            fillPaint.MaskFilter = SKMaskFilter.CreateClip(byte.MinValue, byte.MaxValue);
                             fillPaint.Shader = shader;
                             canvas.DrawPath(path, fillPaint);
 
