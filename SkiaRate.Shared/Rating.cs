@@ -1,13 +1,18 @@
 ﻿using SkiaSharp;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SkiaRate
 {
     public class Rating
     {
 
+        #region fields
+
+        private float val;
+
+        #endregion
+
+        #region properties
         /// <summary>
         /// Gets or sets the spacing between two rating elements
         /// </summary>
@@ -20,34 +25,72 @@ namespace SkiaRate
         public float StrokeWidth { get; set; } = 0.1f;
         public string Path { get; set; }
         public int Count { get; set; } = 5;
-        public RatingType RatingType { get; set; } = RatingType.Full;
-        public float Value { get; set; }
+        public RatingType RatingType { get; set; } = RatingType.Floating;
 
-        public void SetValue(double x, double y)
+        public float Value
         {
-            this.Value = (float)x / (this.ItemWidth);
+            get { return this.val; }
+            set
+            {
+                if (value < 0)
+                    this.val = 0;
+                else if (value > this.Count)
+                    this.val = this.Count;
+                else
+                    this.val = value;
+            }
         }
 
-        private float ItemWidth { get; set; }
-        private float ItemHeight { get; set; }
+        #endregion
 
+        #region public methods
+
+        /// <summary>
+        /// Sets the Rating value
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public void SetValue(double x, double y)
+        {
+            var val = this.CalculateValue(x);
+            switch (this.RatingType)
+            {
+                case RatingType.Full:
+                    this.Value = (float)Math.Ceiling(val);
+                    break;
+                case RatingType.Half:
+                    this.Value = (float)Math.Round(val * 2)/2;
+                    break;
+                case RatingType.Floating:
+                    this.Value = val;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Draws the rating view
+        /// </summary>
+        /// <param name="canvas"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public void Draw(SKCanvas canvas, int width, int height)
         {
             canvas.Clear(this.BackgroundColor);
            
             var path = SKPath.ParseSvgPathData(this.Path);
 
-            this.ItemWidth = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
-            var scaleX = (this.ItemWidth / (path.Bounds.Width));
-            scaleX = (this.ItemWidth - scaleX * this.StrokeWidth) / path.Bounds.Width;
+            var itemWidth = ((width - (this.Count - 1) * this.Spacing)) / this.Count;
+            var scaleX = (itemWidth / (path.Bounds.Width));
+            scaleX = (itemWidth - scaleX * this.StrokeWidth) / path.Bounds.Width;
 
             this.ItemHeight = height;
             var scaleY = this.ItemHeight / (path.Bounds.Height);
             scaleY = (this.ItemHeight - scaleY * this.StrokeWidth) / (path.Bounds.Height);
 
-            var scale = Math.Min(scaleX , scaleY);
+            this.Scale = Math.Min(scaleX , scaleY);
+            this.ItemWidth = path.Bounds.Width * this.Scale;
 
-            canvas.Scale(scale);
+            canvas.Scale(this.Scale);
             canvas.Translate(this.StrokeWidth / 2, this.StrokeWidth / 2);
             canvas.Translate(-path.Bounds.Left, 0);
             canvas.Translate(0, -path.Bounds.Top);
@@ -94,9 +137,30 @@ namespace SkiaRate
                         canvas.DrawPath(path, strokePaint);
                     }
 
-                    canvas.Translate((this.ItemWidth + this.Spacing) / scale, 0);
+                    canvas.Translate((this.ItemWidth + this.Spacing) / this.Scale, 0);
                 }
             }
+
         }
+
+        #endregion
+
+        #region private
+
+        private float ItemWidth { get; set; }
+        private float ItemHeight { get; set; }
+        private float Scale { get; set; }
+
+        private float CalculateValue(double x)
+        {
+            if (x < this.ItemWidth)
+                return (float)x / this.ItemWidth;
+            else if (x < this.ItemWidth + this.Spacing)
+                return 1;
+            else
+                return 1 + CalculateValue(x - (this.ItemWidth + this.Spacing));
+        }
+
+        #endregion
     }
 }
