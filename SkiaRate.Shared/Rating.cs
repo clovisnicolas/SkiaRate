@@ -82,9 +82,8 @@ namespace SkiaRate
                         using (var shader = SKShader.CreateLinearGradient(
                             new SKPoint(path.Bounds.Left, path.Bounds.MidY),
                             new SKPoint(path.Bounds.Right, path.Bounds.MidY),
-                            new SKColor[] { this.OnColor, SKColors.Transparent }, new float[] {filledPercentage, 1-filledPercentage }, SKShaderTileMode.Clamp))
+                            new SKColor[] { this.OnColor, SKColors.Transparent }, new float[] {filledPercentage, 0 }, SKShaderTileMode.Clamp))
                         {
-                            fillPaint.MaskFilter = SKMaskFilter.CreateClip(byte.MinValue, byte.MaxValue);
                             fillPaint.Shader = shader;
                             canvas.DrawPath(path, fillPaint);
 
