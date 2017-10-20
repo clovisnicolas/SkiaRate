@@ -6,6 +6,7 @@ using System.Text;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
+using Android.Views;
 
 namespace SkiaRate.Droid
 {
@@ -29,6 +30,13 @@ namespace SkiaRate.Droid
         protected RatingView(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
             this.PaintSurface += RatingView_PaintSurface;
+        }
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            this.Rating.SetValue(e.GetX(), e.GetY());
+            this.Invalidate();
+            return true;
         }
 
         private Rating rating;

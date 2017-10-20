@@ -1,6 +1,6 @@
 ﻿using SkiaSharp;
 
-namespace SkiaRate.Samples.Uwp
+namespace SkiaRate.Samples
 {
     public static class Sample
     {
