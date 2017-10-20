@@ -6,7 +6,7 @@
     xmlns:skiarate="clr-namespace:SkiaRate.Forms;assembly=SkiaRate.Forms" 
     x:Class="SkiaRate.Samples.Forms.MainPage">
     <ScrollView>
-        <StackLayout Spacing="10" BackgroundColor="#EEEEEE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="10" BackgroundColor="#EEEEEE">
             <skiarate:RatingView x:Name="ratingView1"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView2"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView3"></skiarate:RatingView>
