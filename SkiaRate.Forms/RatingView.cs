@@ -12,7 +12,7 @@ namespace SkiaRate.Forms
             this.PaintSurface += Handle_PaintSurface;
         }
 
-        public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(Rating), typeof(RatingView), typeof(Rating));
+        public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(Rating), typeof(RatingView), default(Rating));
 
         public Rating Rating
         {

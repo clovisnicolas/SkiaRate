@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:SkiaRate.Samples.Forms" 
+    xmlns:skiarate="clr-namespace:SkiaRate.Forms;assembly=SkiaRate.Forms" 
+    x:Class="SkiaRate.Samples.Forms.MainPage">
+    <ScrollView>
+        <StackLayout Spacing="10" BackgroundColor="#EEEEEE" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <skiarate:RatingView x:Name="ratingView1"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView2"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView3"></skiarate:RatingView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
