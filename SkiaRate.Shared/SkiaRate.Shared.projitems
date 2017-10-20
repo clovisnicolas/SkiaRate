@@ -9,6 +9,8 @@
     <Import_RootNamespace>SkiaRate.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)MaterialColors.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PathConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Rating.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RatingType.cs" />
   </ItemGroup>
