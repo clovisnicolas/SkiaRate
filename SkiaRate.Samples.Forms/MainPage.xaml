@@ -6,10 +6,15 @@
     xmlns:skiarate="clr-namespace:SkiaRate.Forms;assembly=SkiaRate.Forms" 
     x:Class="SkiaRate.Samples.Forms.MainPage">
     <ScrollView>
-        <StackLayout Spacing="10" BackgroundColor="#EEEEEE">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <skiarate:RatingView x:Name="ratingView1"></skiarate:RatingView>
-            <skiarate:RatingView x:Name="ratingView2"></skiarate:RatingView>
-            <skiarate:RatingView x:Name="ratingView3"></skiarate:RatingView>
-        </StackLayout>
+            <skiarate:RatingView x:Name="ratingView2" Grid.Row="1"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView3" Grid.Row="2"></skiarate:RatingView>
+        </Grid>
     </ScrollView>
 </ContentPage>
