@@ -8,13 +8,26 @@
     <ScrollView>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="150" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <skiarate:RatingView x:Name="ratingView1"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView2" Grid.Row="1"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView3" Grid.Row="2"></skiarate:RatingView>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <skiarate:RatingView x:Name="ratingView4"></skiarate:RatingView>
+                <skiarate:RatingView x:Name="ratingView5" Grid.Column="1"></skiarate:RatingView>
+            </Grid>
+            <skiarate:RatingView x:Name="ratingView6" Grid.Row="4"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView7" Grid.Row="5"></skiarate:RatingView>
         </Grid>
     </ScrollView>
 </ContentPage>
