@@ -1,17 +1,16 @@
 ﻿using SkiaSharp.Views.Android;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Android.Content;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 
-namespace SkiaRate.Droid
+namespace SkiaRate
 {
-    public class RatingView : SKCanvasView
+    public partial class RatingView : SKCanvasView
     {
+
+        #region constructors
         public RatingView(Context context) : base(context)
         {
             this.PaintSurface += RatingView_PaintSurface;
@@ -32,32 +31,73 @@ namespace SkiaRate.Droid
             this.PaintSurface += RatingView_PaintSurface;
         }
 
-        public override bool OnTouchEvent(MotionEvent e)
-        {
-            this.Rating.SetValue(e.GetX(), e.GetY());
-            this.Invalidate();
-            return true;
-        }
+        #endregion
 
-        private Rating rating;
+        #region fields
 
-        public Rating Rating
+        private float value = 0;
+        private string path = PathConstants.Star;
+        private int count = 5;
+
+        #endregion
+
+        #region properties
+
+        public float Value
         {
-            get { return this.rating; }
+            get { return this.value; }
             set
             {
-                if(this.rating != value)
+                if (value != this.value)
                 {
-                    this.rating = value;
+                    this.value = this.ClampValue(value);
                     this.Invalidate();
                 }
             }
         }
 
+        public string Path
+        {
+            get { return this.path; }
+            set
+            {
+                if (value != this.path)
+                {
+                    this.path = value;
+                    this.Invalidate();
+                }
+            }
+        }
+        public int Count
+        {
+            get { return this.count; }
+            set
+            {
+                if (value != this.count)
+                {
+                    this.count = value;
+                    this.Invalidate();
+                }
+            }
+        }
+
+        #endregion
+
+        #region methods
+
+        public override bool OnTouchEvent(MotionEvent e)
+        {
+            this.SetValue(e.GetX(), e.GetY());
+            this.Invalidate();
+            return true;
+        }
+
         private void RatingView_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            this.Rating?.Draw(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+            this.Draw(e.Surface.Canvas, e.Info.Width, e.Info.Height);
         }
+
+        #endregion
 
     }
 }

@@ -30,7 +30,7 @@ namespace SkiaRate
         public float Value
         {
             get { return (float)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            set { SetValue(ValueProperty, this.ClampValue(value)); }
         }
 
         public string Path

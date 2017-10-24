@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using SkiaRate.Droid;
+using SkiaRate;
 
 namespace SkiaRate.Samples.Droid
 {
@@ -15,9 +15,12 @@ namespace SkiaRate.Samples.Droid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
 
-            FindViewById<RatingView>(Resource.Id.ratingView1).Rating = Sample.StarRating;
-            FindViewById<RatingView>(Resource.Id.ratingView2).Rating = Sample.FavRating;
-            FindViewById<RatingView>(Resource.Id.ratingView3).Rating = Sample.CircleRating;
+            FindViewById<RatingView>(Resource.Id.ratingView1).Value = 4;
+            FindViewById<RatingView>(Resource.Id.ratingView2).Path = PathConstants.Heart;
+            FindViewById<RatingView>(Resource.Id.ratingView2).OnColor = MaterialColors.Red;
+            FindViewById<RatingView>(Resource.Id.ratingView2).Count = 15;
+            FindViewById<RatingView>(Resource.Id.ratingView3).Path = PathConstants.Theaters;
+            FindViewById<RatingView>(Resource.Id.ratingView3).OnColor = MaterialColors.Teal;
         }
     }
 }
