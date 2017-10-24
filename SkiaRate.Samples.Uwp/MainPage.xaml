@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SkiaRate.Samples.Uwp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:skiarate="using:SkiaRate.Uwp"
+    xmlns:skiarate="using:SkiaRate"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
     <Grid>
@@ -15,6 +15,6 @@
         </Grid.RowDefinitions>
         <skiarate:RatingView x:Name="starRatingView" />
         <skiarate:RatingView x:Name="favRatingView" Grid.Row="1"/>
-        <skiarate:RatingView x:Name="sqrRatingView" Grid.Row="2"/>
+        <skiarate:RatingView x:Name="moviesRatingView" Grid.Row="2"/>
     </Grid>
 </Page>

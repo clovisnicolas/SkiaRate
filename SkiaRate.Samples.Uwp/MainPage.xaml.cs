@@ -26,10 +26,12 @@ namespace SkiaRate.Samples.Uwp
         {
             this.InitializeComponent();
 
-            starRatingView.Rating = Sample.StarRating;
-            favRatingView.Rating = Sample.FavRating;
-            sqrRatingView.Rating = Sample.CircleRating;
-
+            starRatingView.Value = 4;
+            favRatingView.Path = PathConstants.Heart;
+            favRatingView.OnColor = MaterialColors.Red;
+            favRatingView.Count = 15;
+            moviesRatingView.Path = PathConstants.Theaters;
+            moviesRatingView.OnColor = MaterialColors.Teal;
         }
     }
 }
