@@ -9,13 +9,12 @@ namespace SkiaRate.Samples.Forms
         public MainPage()
         {
             InitializeComponent();
-            this.ratingView1.Rating = Sample.StarRating;
-            this.ratingView2.Rating = Sample.FavRating;
+           /* this.ratingView2.Rating = Sample.FavRating;
             this.ratingView3.Rating = Sample.CircleRating;
             this.ratingView4.Rating = Sample.LikeRating;
             this.ratingView5.Rating = Sample.DislikeRating;
             this.ratingView6.Rating = Sample.MoviesRating;
-            this.ratingView7.Rating = Sample.ProblemRating;
+            this.ratingView7.Rating = Sample.ProblemRating;*/
         }
 
         protected override void OnAppearing()

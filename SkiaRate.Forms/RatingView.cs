@@ -4,9 +4,9 @@ using Xamarin.Forms;
 using System.Diagnostics;
 using SkiaSharp;
 
-namespace SkiaRate.Forms
+namespace SkiaRate
 {
-    public class RatingView : SKCanvasView
+    public partial class RatingView : SKCanvasView
     {
         private PanGestureRecognizer panGestureRecognizer = new PanGestureRecognizer();
         private double touchX;
@@ -21,33 +21,60 @@ namespace SkiaRate.Forms
             this.GestureRecognizers.Add(panGestureRecognizer);
         }
 
-        public static readonly BindableProperty RatingProperty = BindableProperty.Create(nameof(Rating), typeof(Rating), typeof(RatingView), default(Rating));
+        #region BindableProperties
 
+        public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(float), typeof(RatingView), default(float), propertyChanged: OnValueChanged);
+        public static readonly BindableProperty PathProperty = BindableProperty.Create(nameof(Path), typeof(string), typeof(RatingView), PathConstants.Star, propertyChanged: OnValueChanged);
+        public static readonly BindableProperty CountProperty = BindableProperty.Create(nameof(Count), typeof(int), typeof(RatingView), 5, propertyChanged: OnValueChanged);
 
-        public Rating Rating
+        public float Value
         {
-            get { return (Rating)GetValue(RatingProperty); }
-            set { SetValue(RatingProperty, value); }
+            get { return (float)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
+
+        public string Path
+        {
+            get { return (string)GetValue(PathProperty); }
+            set { SetValue(PathProperty, value); }
+        }
+
+        public int Count
+        {
+            get { return (int)GetValue(CountProperty); }
+            set { SetValue(CountProperty, value); }
+        }
+
+        #endregion
+
+
+        private void Handle_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        {
+            this.Draw(e.Surface.Canvas, e.Info.Width, e.Info.Height);
+        }
+
         protected override void OnTouch(SKTouchEventArgs e)
         {
             this.touchX = e.Location.X;
             this.touchY = e.Location.Y;
-            this.Rating.SetValue(touchX, touchY);
+            this.SetValue(touchX, touchY);
             this.InvalidateSurface();
         }
-        private void Handle_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
-        {
-            this.Rating?.Draw(e.Surface.Canvas, e.Info.Width, e.Info.Height);
-        }
+
         private void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
         {
             var point = ConvertToPixel(new Point(e.TotalX, e.TotalY));
             if(e.StatusType != GestureStatus.Completed)
             {
-                this.Rating.SetValue(touchX + point.X, touchY + e.TotalY);
+                this.SetValue(touchX + point.X, touchY + e.TotalY);
                 this.InvalidateSurface();
             }
+        }
+
+        private static void OnValueChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var view = bindable as RatingView;
+            view.InvalidateSurface();
         }
 
         SKPoint ConvertToPixel(Point pt)

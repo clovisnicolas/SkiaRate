@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)MaterialColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PathConstants.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RatingView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RatingType.cs" />
   </ItemGroup>
 </Project>

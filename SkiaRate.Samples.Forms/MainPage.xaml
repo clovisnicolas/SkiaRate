@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:SkiaRate.Samples.Forms" 
-    xmlns:skiarate="clr-namespace:SkiaRate.Forms;assembly=SkiaRate.Forms" 
+    xmlns:skiarate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms" 
     x:Class="SkiaRate.Samples.Forms.MainPage">
     <ScrollView>
         <Grid>

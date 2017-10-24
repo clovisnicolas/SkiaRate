@@ -3,42 +3,29 @@ using System;
 
 namespace SkiaRate
 {
-    public class Rating
+    public partial class RatingView
     {
-
-        #region fields
-
-        private float val;
-
-        #endregion
-
         #region properties
         /// <summary>
         /// Gets or sets the spacing between two rating elements
         /// </summary>
         public float Spacing { get; set; } = 8;
-        public SKColor BackgroundColor { get; set; } = SKColors.Transparent;
+        public SKColor CanvasBackgroundColor { get; set; } = SKColors.Transparent;
         public SKColor OnColor { get; set; } = SKColors.Gold;
         public SKColor OnOutlineColor { get; set; } = SKColors.Transparent;
         public SKColor OffColor { get; set; } = SKColors.Transparent;
         public SKColor OffOutlineColor { get; set; } = SKColors.LightGray;
         public float StrokeWidth { get; set; } = 0.1f;
-        public string Path { get; set; }
-        public int Count { get; set; } = 5;
         public RatingType RatingType { get; set; } = RatingType.Floating;
 
-        public float Value
+        public float ClampValue(float val)
         {
-            get { return this.val; }
-            set
-            {
-                if (value < 0)
-                    this.val = 0;
-                else if (value > this.Count)
-                    this.val = this.Count;
-                else
-                    this.val = value;
-            }
+            if (val < 0) 
+                return 0;
+            else if (val > this.Count) 
+                return this.Count;
+            else 
+                return val;
         }
 
         #endregion
@@ -56,13 +43,13 @@ namespace SkiaRate
             switch (this.RatingType)
             {
                 case RatingType.Full:
-                    this.Value = (float)Math.Ceiling(val);
+                    this.Value = ClampValue((float)Math.Ceiling(val));
                     break;
                 case RatingType.Half:
-                    this.Value = (float)Math.Round(val * 2)/2;
+                    this.Value = ClampValue((float)Math.Round(val * 2)/2);
                     break;
                 case RatingType.Floating:
-                    this.Value = val;
+                    this.Value = ClampValue(val);
                     break;
             }
         }
@@ -75,7 +62,7 @@ namespace SkiaRate
         /// <param name="height"></param>
         public void Draw(SKCanvas canvas, int width, int height)
         {
-            canvas.Clear(this.BackgroundColor);
+            canvas.Clear(this.CanvasBackgroundColor);
            
             var path = SKPath.ParseSvgPathData(this.Path);
 
@@ -87,10 +74,10 @@ namespace SkiaRate
             var scaleY = this.ItemHeight / (path.Bounds.Height);
             scaleY = (this.ItemHeight - scaleY * this.StrokeWidth) / (path.Bounds.Height);
 
-            this.Scale = Math.Min(scaleX , scaleY);
-            this.ItemWidth = path.Bounds.Width * this.Scale;
+            this.CanvasScale = Math.Min(scaleX , scaleY);
+            this.ItemWidth = path.Bounds.Width * this.CanvasScale;
 
-            canvas.Scale(this.Scale);
+            canvas.Scale(this.CanvasScale);
             canvas.Translate(this.StrokeWidth / 2, this.StrokeWidth / 2);
             canvas.Translate(-path.Bounds.Left, 0);
             canvas.Translate(0, -path.Bounds.Top);
@@ -137,7 +124,7 @@ namespace SkiaRate
                         canvas.DrawPath(path, strokePaint);
                     }
 
-                    canvas.Translate((this.ItemWidth + this.Spacing) / this.Scale, 0);
+                    canvas.Translate((this.ItemWidth + this.Spacing) / this.CanvasScale, 0);
                 }
             }
 
@@ -149,7 +136,7 @@ namespace SkiaRate
 
         private float ItemWidth { get; set; }
         private float ItemHeight { get; set; }
-        private float Scale { get; set; }
+        private float CanvasScale { get; set; }
 
         private float CalculateValue(double x)
         {
