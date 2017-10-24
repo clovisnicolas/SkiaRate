@@ -1,6 +1,5 @@
 ﻿using System;
 using UIKit;
-using SkiaRate.iOS;
 using SkiaSharp;
 using SkiaSharp.Views.iOS;
 
@@ -17,9 +16,9 @@ namespace SkiaRate.Samples.iOS
         {
             base.ViewDidLoad();
 
-            view1.AddSubview(new RatingView() { Frame = view1.Bounds, Rating = Sample.StarRating });
-            view2.AddSubview(new RatingView() { Frame = view2.Bounds, Rating = Sample.FavRating });
-            view3.AddSubview(new RatingView() { Frame = view3.Bounds, Rating = Sample.CircleRating });
+            view1.AddSubview(new RatingView() { Frame = view1.Bounds, Value = 4 });
+            view2.AddSubview(new RatingView() { Frame = view2.Bounds, Path = PathConstants.Heart, OnColor = MaterialColors.Red});
+            view3.AddSubview(new RatingView() { Frame = view3.Bounds, Path = PathConstants.Like, Count = 1, OnColor = MaterialColors.LightBlue });
         }
     }
 }
