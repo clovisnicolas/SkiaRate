@@ -22,6 +22,10 @@ namespace SkiaRate
         private float value = 0;
         private string path = PathConstants.Star;
         private int count = 5;
+        private SKColor onColor = MaterialColors.Amber;
+        private SKColor onOutlineColor = SKColors.Transparent;
+        private SKColor offOutlineColor = MaterialColors.Grey;
+        private RatingType ratingType = RatingType.Floating;
 
         #endregion
 
@@ -62,6 +66,58 @@ namespace SkiaRate
                     this.count = value;
                     this.SetNeedsDisplayInRect(this.Bounds);
                 }
+            }
+        }
+
+        public SKColor OnColor
+        {
+            get { return this.onColor; }
+            set 
+            { 
+                if (value != this.onColor)
+                {
+                    this.onColor = value;
+                    this.SetNeedsDisplayInRect(this.Bounds);
+                }
+            }
+        }
+
+        public SKColor OnOutlineColor
+        {
+            get { return this.onOutlineColor; }
+            set 
+            { 
+                if (value != this.onOutlineColor)
+                {
+                    this.onOutlineColor = value;
+                    this.SetNeedsDisplayInRect(this.Bounds);
+                }
+            }
+        }
+
+        public SKColor OffOutlineColor
+        {
+            get { return this.offOutlineColor; }
+            set 
+            {
+                if (value != this.offOutlineColor)
+                {
+                    this.offOutlineColor = value;
+                    this.SetNeedsDisplayInRect(this.Bounds);
+                }
+            }
+        }
+
+        public RatingType RatingType
+        {
+            get { return this.ratingType; }
+            set 
+            { 
+                if(value != this.ratingType)
+                {
+                    this.ratingType = value;
+                    this.SetNeedsDisplayInRect(this.Bounds);
+                } 
             }
         }
 
