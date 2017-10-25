@@ -11,12 +11,12 @@ namespace SkiaRate
         /// </summary>
         public float Spacing { get; set; } = 8;
         public SKColor CanvasBackgroundColor { get; set; } = SKColors.Transparent;
-        public SKColor OnColor { get; set; } = SKColors.Gold;
-        public SKColor OnOutlineColor { get; set; } = SKColors.Transparent;
-        public SKColor OffColor { get; set; } = SKColors.Transparent;
-        public SKColor OffOutlineColor { get; set; } = SKColors.LightGray;
-        public float StrokeWidth { get; set; } = 0.1f;
-        public RatingType RatingType { get; set; } = RatingType.Floating;
+		public float StrokeWidth { get; set; } = 0.1f;
+        //TODO public SKColor OffColor { get; set; } = SKColors.Transparent;
+        //public SKColor OnColor { get; set; } = SKColors.Gold;
+        //public SKColor OnOutlineColor { get; set; } = SKColors.Transparent;
+        //public SKColor OffOutlineColor { get; set; } = SKColors.LightGray;
+        //public RatingType RatingType { get; set; } = RatingType.Floating;
 
         public float ClampValue(float val)
         {
