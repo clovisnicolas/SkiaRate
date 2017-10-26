@@ -10,15 +10,17 @@
             <local:ValueToColorConverter x:Key="valueToColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ScrollView Padding="0,20,0,0">
+    <ScrollView Padding="8,20,8,0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="150" />
                 <RowDefinition Height="100" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <skiarate:RatingView x:Name="ratingView1" OnColor="{Binding Source={x:Reference Name=ratingView1}, Path=Value, Converter={StaticResource valueToColorConverter}, ConverterParameter=5}" ></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView2" Count="8" Grid.Row="1"></skiarate:RatingView>
@@ -32,7 +34,9 @@
                 <skiarate:RatingView x:Name="ratingView5" Count="1" Grid.Column="1"></skiarate:RatingView>
             </Grid>
             <skiarate:RatingView x:Name="ratingView6" Grid.Row="4"></skiarate:RatingView>
-            <skiarate:RatingView x:Name="ratingView7" Grid.Row="5"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView8" Count="3" Grid.Row="5"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView9" Count="1" Grid.Row="6"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView7" Spacing="0" Count="1" Grid.Row="7"></skiarate:RatingView>
         </Grid>
     </ScrollView>
 </ContentPage>
