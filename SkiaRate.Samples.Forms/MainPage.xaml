@@ -5,7 +5,12 @@
     xmlns:local="clr-namespace:SkiaRate.Samples.Forms" 
     xmlns:skiarate="clr-namespace:SkiaRate;assembly=SkiaRate.Forms" 
     x:Class="SkiaRate.Samples.Forms.MainPage">
-    <ScrollView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ValueToColorConverter x:Key="valueToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Padding="0,20,0,0">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
@@ -15,16 +20,16 @@
                 <RowDefinition Height="100" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <skiarate:RatingView x:Name="ratingView1"></skiarate:RatingView>
-            <skiarate:RatingView x:Name="ratingView2" Grid.Row="1"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView1" OnColor="{Binding Source={x:Reference Name=ratingView1}, Path=Value, Converter={StaticResource valueToColorConverter}, ConverterParameter=5}" ></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView2" Count="8" Grid.Row="1"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView3" Grid.Row="2"></skiarate:RatingView>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <skiarate:RatingView x:Name="ratingView4"></skiarate:RatingView>
-                <skiarate:RatingView x:Name="ratingView5" Grid.Column="1"></skiarate:RatingView>
+                <skiarate:RatingView x:Name="ratingView4" Count="1"></skiarate:RatingView>
+                <skiarate:RatingView x:Name="ratingView5" Count="1" Grid.Column="1"></skiarate:RatingView>
             </Grid>
             <skiarate:RatingView x:Name="ratingView6" Grid.Row="4"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView7" Grid.Row="5"></skiarate:RatingView>

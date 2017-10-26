@@ -9,11 +9,6 @@
     <PackageReference Include="SkiaSharp.Views.Forms" Version="1.59.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SkiaRate.Samples.Uwp\Sample.cs">
-      <Link>Sample.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Update="App.xaml.cs">
       <DependentUpon>*.xaml</DependentUpon>
     </Compile>
@@ -26,5 +21,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SkiaRate.Forms\SkiaRate.Forms.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>
