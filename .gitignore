@@ -283,8 +283,8 @@ __pycache__/
 *.pyc
 
 # Cake - Uncomment if you are using it
-# tools/**
-# !tools/packages.config
+tools/**
+!tools/packages.config
 
 # Tabs Studio
 *.tss
@@ -298,3 +298,4 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 Droid/Resources/Resource.designer.cs
+build/
