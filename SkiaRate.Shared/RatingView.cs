@@ -10,23 +10,37 @@ namespace SkiaRate
         /// Gets or sets the spacing between two rating elements
         /// </summary>
         public float Spacing { get; set; } = 8;
-        public SKColor CanvasBackgroundColor { get; set; } = SKColors.Transparent;
-		public float StrokeWidth { get; set; } = 0.1f;
-        //TODO public SKColor OffColor { get; set; } = SKColors.Transparent;
 
-        public float ClampValue(float val)
-        {
-            if (val < 0) 
-                return 0;
-            else if (val > this.Count) 
-                return this.Count;
-            else 
-                return val;
-        }
+        /// <summary>
+        /// Gets or sets the color of the canvas background.
+        /// </summary>
+        /// <value>The color of the canvas background.</value>
+        public SKColor CanvasBackgroundColor { get; set; } = SKColors.Transparent;
+
+        /// <summary>
+        /// Gets or sets the width of the stroke.
+        /// </summary>
+        /// <value>The width of the stroke.</value>
+		public float StrokeWidth { get; set; } = 0.1f;
 
         #endregion
 
         #region public methods
+
+        /// <summary>
+        /// Clamps the value between 0 and the number of items.
+        /// </summary>
+        /// <returns>The value.</returns>
+        /// <param name="val">Value.</param>
+        public float ClampValue(float val)
+        {
+            if (val < 0)
+                return 0;
+            else if (val > this.Count)
+                return this.Count;
+            else
+                return val;
+        }
 
         /// <summary>
         /// Sets the Rating value
@@ -81,7 +95,7 @@ namespace SkiaRate
             using (var strokePaint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
-                Color = this.OnOutlineColor,
+                Color = this.SKOutlineOnColor,
                 StrokeWidth = this.StrokeWidth,
                 StrokeJoin = SKStrokeJoin.Round,
                 IsAntialias = true,
@@ -89,7 +103,7 @@ namespace SkiaRate
             using (var fillPaint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,
-                Color = this.OnColor,
+                Color = this.SKColorOn,
                 IsAntialias = true,
             })
             {
@@ -103,7 +117,7 @@ namespace SkiaRate
                     else if (i < this.Value) //Partial
                     {
                         float filledPercentage = (float)(this.Value - Math.Truncate(this.Value));
-                        strokePaint.Color = this.OffOutlineColor;
+                        strokePaint.Color = this.SKOutlineOffColor;
                         canvas.DrawPath(path, strokePaint);
 
                         using (var rectPath = new SKPath())
@@ -116,7 +130,7 @@ namespace SkiaRate
                     }
                     else //Empty
                     {
-                        strokePaint.Color = this.OffOutlineColor;
+                        strokePaint.Color = this.SKOutlineOffColor;
                         canvas.DrawPath(path, strokePaint);
                     }
 
@@ -133,6 +147,9 @@ namespace SkiaRate
         private float ItemWidth { get; set; }
         private float ItemHeight { get; set; }
         private float CanvasScale { get; set; }
+        private SKColor SKColorOn { get; set; } = MaterialColors.Amber;
+        private SKColor SKOutlineOnColor { get; set; } = SKColors.Transparent;
+        private SKColor SKOutlineOffColor { get; set; } = MaterialColors.Grey;
 
         private float CalculateValue(double x)
         {

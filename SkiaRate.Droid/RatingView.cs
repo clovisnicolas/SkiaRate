@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using SkiaSharp;
+using Android.Graphics;
 
 namespace SkiaRate
 {
@@ -39,9 +40,6 @@ namespace SkiaRate
         private float value = 0;
         private string path = PathConstants.Star;
         private int count = 5;
-        private SKColor onColor = MaterialColors.Amber;
-        private SKColor onOutlineColor = SKColors.Transparent;
-        private SKColor offOutlineColor = MaterialColors.Grey;
         private RatingType ratingType = RatingType.Floating;
 
         #endregion
@@ -86,40 +84,40 @@ namespace SkiaRate
             }
         }
 
-        public SKColor OnColor
+        public Color ColorOn
         {
-            get { return this.onColor; }
+            get { return this.SKColorOn.ToColor(); }
             set
             {
-                if (value != this.onColor)
+                if (value.ToSKColor() != this.SKColorOn)
                 {
-                    this.onColor = value;
+                    this.SKColorOn = value.ToSKColor();
                     this.Invalidate();
                 }
             }
         }
 
-        public SKColor OnOutlineColor
+        public Color OutlineOnColor
         {
-            get { return this.onOutlineColor; }
+            get { return this.SKOutlineOnColor.ToColor(); }
             set
             {
-                if (value != this.onOutlineColor)
+                if (value.ToSKColor() != this.SKOutlineOnColor)
                 {
-                    this.onOutlineColor = value;
+                    this.SKOutlineOnColor = value.ToSKColor();
                     this.Invalidate();
                 }
             }
         }
 
-        public SKColor OffOutlineColor
+        public Color OutlineOffColor
         {
-            get { return this.offOutlineColor; }
+            get { return this.SKOutlineOffColor.ToColor(); }
             set
             {
-                if (value != this.offOutlineColor)
+                if (value.ToSKColor() != this.SKOutlineOffColor)
                 {
-                    this.offOutlineColor = value;
+                    this.SKOutlineOffColor = value.ToSKColor();
                     this.Invalidate();
                 }
             }

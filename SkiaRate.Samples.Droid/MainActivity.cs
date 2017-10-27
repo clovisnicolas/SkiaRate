@@ -2,6 +2,7 @@
 using Android.Widget;
 using Android.OS;
 using SkiaRate;
+using SkiaSharp.Views.Android;
 
 namespace SkiaRate.Samples.Droid
 {
@@ -17,10 +18,10 @@ namespace SkiaRate.Samples.Droid
 
             FindViewById<RatingView>(Resource.Id.ratingView1).Value = 4;
             FindViewById<RatingView>(Resource.Id.ratingView2).Path = PathConstants.Heart;
-            FindViewById<RatingView>(Resource.Id.ratingView2).OnColor = MaterialColors.Red;
+            FindViewById<RatingView>(Resource.Id.ratingView2).ColorOn = MaterialColors.Red.ToColor();
             FindViewById<RatingView>(Resource.Id.ratingView2).Count = 15;
             FindViewById<RatingView>(Resource.Id.ratingView3).Path = PathConstants.Theaters;
-            FindViewById<RatingView>(Resource.Id.ratingView3).OnColor = MaterialColors.Teal;
+            FindViewById<RatingView>(Resource.Id.ratingView3).ColorOn = MaterialColors.Teal.ToColor();
         }
     }
 }

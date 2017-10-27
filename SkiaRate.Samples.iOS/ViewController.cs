@@ -17,8 +17,8 @@ namespace SkiaRate.Samples.iOS
             base.ViewDidLoad();
 
             view1.AddSubview(new RatingView() { Frame = view1.Bounds, Value = 4 });
-            view2.AddSubview(new RatingView() { Frame = view2.Bounds, Path = PathConstants.Heart, OnColor = MaterialColors.Red});
-            view3.AddSubview(new RatingView() { Frame = view3.Bounds, Path = PathConstants.Like, Count = 1, OnColor = MaterialColors.LightBlue });
+            view2.AddSubview(new RatingView() { Frame = view2.Bounds, Path = PathConstants.Heart, ColorOn = MaterialColors.Red.ToUIColor()});
+            view3.AddSubview(new RatingView() { Frame = view3.Bounds, Path = PathConstants.Like, Count = 1, ColorOn = MaterialColors.LightBlue.ToUIColor() });
         }
     }
 }

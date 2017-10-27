@@ -22,9 +22,6 @@ namespace SkiaRate
         private float value = 0;
         private string path = PathConstants.Star;
         private int count = 5;
-        private SKColor onColor = MaterialColors.Amber;
-        private SKColor onOutlineColor = SKColors.Transparent;
-        private SKColor offOutlineColor = MaterialColors.Grey;
         private RatingType ratingType = RatingType.Floating;
 
         #endregion
@@ -69,40 +66,40 @@ namespace SkiaRate
             }
         }
 
-        public SKColor OnColor
+        public UIColor ColorOn
         {
-            get { return this.onColor; }
+            get { return this.SKColorOn.ToUIColor(); }
             set 
             { 
-                if (value != this.onColor)
+                if (value.ToSKColor() != this.SKColorOn)
                 {
-                    this.onColor = value;
+                    this.SKColorOn = value.ToSKColor();
                     this.SetNeedsDisplayInRect(this.Bounds);
                 }
             }
         }
 
-        public SKColor OnOutlineColor
+        public UIColor OutlineOnColor
         {
-            get { return this.onOutlineColor; }
+            get { return this.SKOutlineOnColor.ToUIColor(); }
             set 
             { 
-                if (value != this.onOutlineColor)
+                if (value.ToSKColor() != this.SKOutlineOnColor)
                 {
-                    this.onOutlineColor = value;
+                    this.SKOutlineOnColor = value.ToSKColor();
                     this.SetNeedsDisplayInRect(this.Bounds);
                 }
             }
         }
 
-        public SKColor OffOutlineColor
+        public UIColor OutlineOffColor
         {
-            get { return this.offOutlineColor; }
+            get { return this.SKOutlineOffColor.ToUIColor(); }
             set 
             {
-                if (value != this.offOutlineColor)
+                if (value.ToSKColor() != this.SKOutlineOffColor)
                 {
-                    this.offOutlineColor = value;
+                    this.SKOutlineOffColor = value.ToSKColor();
                     this.SetNeedsDisplayInRect(this.Bounds);
                 }
             }
@@ -113,7 +110,7 @@ namespace SkiaRate
             get { return this.ratingType; }
             set 
             { 
-                if(value != this.ratingType)
+                if (value != this.ratingType)
                 {
                     this.ratingType = value;
                     this.SetNeedsDisplayInRect(this.Bounds);

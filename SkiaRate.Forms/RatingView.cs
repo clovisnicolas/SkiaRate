@@ -26,9 +26,9 @@ namespace SkiaRate
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(float), typeof(RatingView), default(float), propertyChanged: OnValueChanged);
         public static readonly BindableProperty PathProperty = BindableProperty.Create(nameof(Path), typeof(string), typeof(RatingView), PathConstants.Star, propertyChanged: OnValueChanged);
         public static readonly BindableProperty CountProperty = BindableProperty.Create(nameof(Count), typeof(int), typeof(RatingView), 5, propertyChanged: OnValueChanged);
-        public static readonly BindableProperty OnColorProperty = BindableProperty.Create(nameof(OnColor), typeof(SKColor), typeof(RatingView), MaterialColors.Amber, propertyChanged: OnValueChanged);
-        public static readonly BindableProperty OnOutlineColorProperty = BindableProperty.Create(nameof(OnOutlineColor), typeof(SKColor), typeof(RatingView), SKColors.Transparent, propertyChanged: OnValueChanged);
-        public static readonly BindableProperty OffOutlineColorProperty = BindableProperty.Create(nameof(OffOutlineColor), typeof(SKColor), typeof(RatingView), MaterialColors.Grey, propertyChanged: OnValueChanged);
+        public static readonly BindableProperty ColorOnProperty = BindableProperty.Create(nameof(ColorOn), typeof(Color), typeof(RatingView), MaterialColors.Amber.ToFormsColor(), propertyChanged: ColorOnChanged);
+        public static readonly BindableProperty OutlineOnColorProperty = BindableProperty.Create(nameof(OutlineOnColor), typeof(Color), typeof(RatingView), SKColors.Transparent.ToFormsColor(), propertyChanged: OutlineOnColorChanged);
+        public static readonly BindableProperty OutlineOffColorProperty = BindableProperty.Create(nameof(OutlineOffColor), typeof(Color), typeof(RatingView), MaterialColors.Grey.ToFormsColor(), propertyChanged: OutlineOffColorChanged);
         public static readonly BindableProperty RatingTypeProperty = BindableProperty.Create(nameof(RatingType), typeof(RatingType), typeof(RatingView), RatingType.Floating, propertyChanged: OnValueChanged);
 
         public float Value
@@ -49,22 +49,33 @@ namespace SkiaRate
             set { SetValue(CountProperty, value); }
         }
 
-        public SKColor OnColor
+        public Color ColorOn
         {
-            get { return (SKColor)GetValue(OnColorProperty); }
-            set{ SetValue(OnColorProperty, value);}
+            get { return (Color)GetValue(ColorOnProperty); }
+            set
+            {
+                SetValue(ColorOnProperty, value);
+            }
         }
 
-        public SKColor OnOutlineColor
+        public Color OutlineOnColor
         {
-            get { return (SKColor)GetValue(OnOutlineColorProperty); }
-            set { SetValue(OnOutlineColorProperty, value); }
+            get { return (Color)GetValue(OutlineOnColorProperty); }
+            set 
+            {
+                SetValue(OutlineOnColorProperty, value);
+                this.SKOutlineOnColor = value.ToSKColor();
+            }
         }
 
-        public SKColor OffOutlineColor
+        public Color OutlineOffColor
         {
-            get { return (SKColor)GetValue(OffOutlineColorProperty); }
-            set { SetValue(OffOutlineColorProperty, value); }
+            get { return (Color)GetValue(OutlineOffColorProperty); }
+            set 
+            { 
+                SetValue(OutlineOffColorProperty, value);
+                this.SKOutlineOffColor = value.ToSKColor();
+            }
         }
 
         public RatingType RatingType
@@ -103,6 +114,27 @@ namespace SkiaRate
         {
             var view = bindable as RatingView;
             view.InvalidateSurface();
+        }
+
+        private static void ColorOnChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var view = bindable as RatingView;
+            view.SKColorOn = ((Color)newValue).ToSKColor();
+            OnValueChanged(bindable, oldValue, newValue);
+        }
+
+        private static void OutlineOffColorChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var view = bindable as RatingView;
+            view.SKOutlineOffColor = ((Color)newValue).ToSKColor();
+            OnValueChanged(bindable, oldValue, newValue);
+        }
+
+        private static void OutlineOnColorChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var view = bindable as RatingView;
+            view.SKOutlineOnColor = ((Color)newValue).ToSKColor();
+            OnValueChanged(bindable, oldValue, newValue);
         }
 
         SKPoint ConvertToPixel(Point pt)
