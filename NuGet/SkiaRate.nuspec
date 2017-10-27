@@ -7,10 +7,9 @@
     <owners>clovisnicolas</owners>
     <licenseUrl>https://github.com/clovisnicolas/SkiaRate/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/clovisnicolas/SkiaRate</projectUrl>
-    <iconUrl>https://dummyimage.com/100/35acd4/ffffff.png&text=SkiaRate</iconUrl>
+    <iconUrl>http://via.placeholder.com/120?text=SkiaRate</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <description>Cross-platform rating component using SkiaSharp</description>
     <copyright>Copyright 2017</copyright>
     <tags>Rating View Xamarin SkiaSharp</tags>
     <dependencies>
@@ -19,10 +18,10 @@
   </metadata>
   <files>
       <!-- Android -->
-    <file src="..\Sources\Microcharts.Droid\bin\Release\SkiaRate.Droid.dll" target="lib\MonoAndroid10\SkiaRate.dll"/>
+    <file src="..\Sources\SkiaRate.Droid\bin\Release\SkiaRate.Droid.dll" target="lib\MonoAndroid10\SkiaRate.dll"/>
       <!-- iOS -->
-    <file src="..\Sources\Microcharts.iOS\bin\Release\SkiaRate.iOS.dll" target="lib\Xamarin.iOS10\SkiaRate.dll"/>
+    <file src="..\Sources\SkiaRate.iOS\bin\Release\SkiaRate.iOS.dll" target="lib\Xamarin.iOS10\SkiaRate.dll"/>
       <!-- UWP -->
-    <file src="..\Sources\Microcharts.Uwp\bin\Release\SkiaRate.Uwp.dll" target="lib\uap\SkiaRate.dll"/>
+    <file src="..\Sources\SkiaRate.Uwp\bin\Release\SkiaRate.Uwp.dll" target="lib\uap\SkiaRate.dll"/>
 </files>
 </package>

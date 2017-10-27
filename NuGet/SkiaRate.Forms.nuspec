@@ -7,20 +7,22 @@
     <owners>clovisnicolas</owners>
     <licenseUrl>https://github.com/clovisnicolas/SkiaRate/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/clovisnicolas/SkiaRate</projectUrl>
-    <iconUrl>https://dummyimage.com/100/35acd4/ffffff.png&text=SkiaRate</iconUrl>
+    <iconUrl>http://via.placeholder.com/120?text=SkiaRate</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <description>Cross-platform rating component for Xamarin.Forms using SkiaSharp</description>
     <copyright>Copyright 2017</copyright>
     <tags>Rating View Xamarin Forms SkiaSharp</tags>
     <dependencies>
-      <dependency id="SampleDependency" version="1.0" />
+		<group>
+            <dependency id="Xamarin.Forms" version="2.4.0.282" />
+            <dependency id="SkiaSharp.Views.Forms" version="1.59.1.1" />
+        </group>
     </dependencies>
   </metadata>
   <files>
     <!-- .Net Standard -->
-    <file src="..\Sources\SkiaRate.Forms\bin\Release\netstandard1.3\SkiaRate.dll" target="lib\netstandard1.3\SkiaRate.Forms.dll"/>
+    <file src="..\Sources\SkiaRate.Forms\bin\Release\netstandard1.3\SkiaRate.Forms.dll" target="lib\netstandard1.3\SkiaRate.Forms.dll"/>
       <!-- PCL -->
-    <file src="..\Sources\SkiaRate.Forms\bin\Release\portable-net45+win8+wpa81+wp8\SkiaRate.dll" target="lib\portable-net45+win8+wpa81+wp8\SkiaRate.Forms.dll"/>
+    <file src="..\Sources\SkiaRate.Forms\bin\Release\portable-net45+win8+wpa81+wp8\SkiaRate.Forms.dll" target="lib\portable-net45+win8+wpa81+wp8\SkiaRate.Forms.dll"/>
 </files>
 </package>
