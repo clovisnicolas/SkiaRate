@@ -19,7 +19,7 @@
                 <RowDefinition Height="150" />
                 <RowDefinition Height="100" />
                 <RowDefinition Height="20" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="100" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <skiarate:RatingView x:Name="ratingView1" OnColor="{Binding Source={x:Reference Name=ratingView1}, Path=Value, Converter={StaticResource valueToColorConverter}, ConverterParameter=5}" ></skiarate:RatingView>
@@ -35,7 +35,14 @@
             </Grid>
             <skiarate:RatingView x:Name="ratingView6" Grid.Row="4"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView8" Count="3" Grid.Row="5"></skiarate:RatingView>
-            <skiarate:RatingView x:Name="ratingView9" Count="1" Grid.Row="6"></skiarate:RatingView>
+            <Grid Grid.Row="6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <skiarate:RatingView x:Name="batteryView" Count="1" Value="1" StrokeWidth="0.2" />
+                <skiarate:RatingView x:Name="lowBatteryView" Grid.Column="1" Count="1" Value="1" />
+            </Grid>
             <skiarate:RatingView x:Name="ratingView7" Spacing="0" Count="1" Grid.Row="7"></skiarate:RatingView>
         </Grid>
     </ScrollView>

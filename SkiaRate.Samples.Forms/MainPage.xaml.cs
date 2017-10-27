@@ -27,13 +27,14 @@ namespace SkiaRate.Samples.Forms
             this.ratingView8.OnColor = MaterialColors.Blue;
             this.ratingView8.StrokeWidth = 1;
             this.ratingView8.OffOutlineColor = MaterialColors.Blue;
-            this.ratingView9.Path = PathConstants.BatteryCharging;
-            this.ratingView9.OnOutlineColor = MaterialColors.Black;
-            this.ratingView9.StrokeWidth = 0.3F;
-            this.ratingView9.Value = 1;
+            this.batteryView.Path = PathConstants.BatteryCharging;
+            this.batteryView.OnOutlineColor = MaterialColors.Black;
+            this.lowBatteryView.Path = PathConstants.BatteryAlert;
+            this.lowBatteryView.OnOutlineColor = MaterialColors.Red;
+            this.lowBatteryView.Value = 1;
             this.UpdateLoader();
             this.UpdateBattery();
-
+            this.UpdateLowBattery();
         }
 
         private async void UpdateLoader()
@@ -52,11 +53,28 @@ namespace SkiaRate.Samples.Forms
             while (true)
             {
                 await Task.Delay(33);
-                this.ratingView9.OnColor = MaterialColors.Lime.WithAlpha((byte)(255 * totalTime));
+                this.batteryView.OnColor = MaterialColors.Lime.WithAlpha((byte)(255 * totalTime));
                 totalTime += step;
                 if(totalTime > 1 || totalTime < 0)
                 {
                     totalTime = Math.Min(1,Math.Max(0,totalTime));
+                    step = -step;
+                }
+            }
+        }
+
+        private async void UpdateLowBattery()
+        {
+            float totalTime = 0;
+            var step = 0.02f;
+            while (true)
+            {
+                await Task.Delay(33);
+                this.lowBatteryView.OnColor = MaterialColors.Red.WithAlpha((byte)(255 * totalTime));
+                totalTime += step;
+                if (totalTime > 1 || totalTime < 0)
+                {
+                    totalTime = Math.Min(1, Math.Max(0, totalTime));
                     step = -step;
                 }
             }
