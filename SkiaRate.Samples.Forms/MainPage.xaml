@@ -8,6 +8,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <local:ValueToColorConverter x:Key="valueToColorConverter" />
+            <local:ValueToMoviesColorConverter x:Key="valueToMoviesColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Padding="8,20,8,0">
@@ -33,7 +34,7 @@
                 <skiarate:RatingView x:Name="ratingView4" ColorOn="#03A9F4" Count="1"></skiarate:RatingView>
                 <skiarate:RatingView x:Name="ratingView5" ColorOn="#F44336" Count="1" Grid.Column="1"></skiarate:RatingView>
             </Grid>
-            <skiarate:RatingView x:Name="ratingView6" ColorOn="#9C27B0" Grid.Row="4"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView6" ColorOn="{Binding Source={x:Reference Name=ratingView6}, Path=Value, Converter={StaticResource valueToMoviesColorConverter}, ConverterParameter=5}" Grid.Row="4"></skiarate:RatingView>
             <skiarate:RatingView x:Name="ratingView8" ColorOn="#2196F3" OutlineOffColor="#2196F3" Count="3" Grid.Row="5"></skiarate:RatingView>
             <Grid Grid.Row="6">
                 <Grid.ColumnDefinitions>
@@ -43,7 +44,7 @@
                 <skiarate:RatingView x:Name="batteryView" OutlineOnColor="Black" Count="1" Value="1" StrokeWidth="0.2" />
                 <skiarate:RatingView x:Name="lowBatteryView" OutlineOnColor="#F44336" Grid.Column="1" Count="1" Value="1" />
             </Grid>
-            <skiarate:RatingView x:Name="ratingView7" ColorOn="#3F51B5" Spacing="0" Count="1" Grid.Row="7"></skiarate:RatingView>
+            <skiarate:RatingView x:Name="ratingView7" ColorOn="#8BC34A" Spacing="0" Count="1" Grid.Row="7"></skiarate:RatingView>
         </Grid>
     </ScrollView>
 </ContentPage>

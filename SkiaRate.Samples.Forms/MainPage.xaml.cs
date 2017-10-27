@@ -23,7 +23,7 @@ namespace SkiaRate.Samples.Forms
             this.ratingView8.StrokeWidth = 1;
             this.batteryView.Path = PathConstants.BatteryCharging;
             this.lowBatteryView.Path = PathConstants.BatteryAlert;
-            this.lowBatteryView.Value = 1;
+            this.ratingView6.RatingType = RatingType.Full;
             this.UpdateLoader();
             this.UpdateBattery();
             this.UpdateLowBattery();
