@@ -26,12 +26,9 @@ namespace SkiaRate.Samples.Uwp
         {
             this.InitializeComponent();
 
-            starRatingView.Value = 4;
             favRatingView.Path = PathConstants.Heart;
-            favRatingView.OnColor = MaterialColors.Red;
-            favRatingView.Count = 15;
             moviesRatingView.Path = PathConstants.Theaters;
-            moviesRatingView.OnColor = MaterialColors.Teal;
+            //moviesRatingView.Value = 2.0f;
         }
     }
 }

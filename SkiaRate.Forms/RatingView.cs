@@ -52,30 +52,19 @@ namespace SkiaRate
         public Color ColorOn
         {
             get { return (Color)GetValue(ColorOnProperty); }
-            set
-            {
-                SetValue(ColorOnProperty, value);
-            }
+            set { SetValue(ColorOnProperty, value); }
         }
 
         public Color OutlineOnColor
         {
             get { return (Color)GetValue(OutlineOnColorProperty); }
-            set 
-            {
-                SetValue(OutlineOnColorProperty, value);
-                this.SKOutlineOnColor = value.ToSKColor();
-            }
+            set { SetValue(OutlineOnColorProperty, value); }
         }
 
         public Color OutlineOffColor
         {
             get { return (Color)GetValue(OutlineOffColorProperty); }
-            set 
-            { 
-                SetValue(OutlineOffColorProperty, value);
-                this.SKOutlineOffColor = value.ToSKColor();
-            }
+            set { SetValue(OutlineOffColorProperty, value); }
         }
 
         public RatingType RatingType

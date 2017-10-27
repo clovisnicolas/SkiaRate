@@ -32,7 +32,7 @@ namespace SkiaRate
         /// </summary>
         /// <returns>The value.</returns>
         /// <param name="val">Value.</param>
-        public float ClampValue(float val)
+        public double ClampValue(double val)
         {
             if (val < 0)
                 return 0;
@@ -53,10 +53,10 @@ namespace SkiaRate
             switch (this.RatingType)
             {
                 case RatingType.Full:
-                    this.Value = ClampValue((float)Math.Ceiling(val));
+                    this.Value = ClampValue((double)Math.Ceiling(val));
                     break;
                 case RatingType.Half:
-                    this.Value = ClampValue((float)Math.Round(val * 2)/2);
+                    this.Value = ClampValue((double)Math.Round(val * 2)/2);
                     break;
                 case RatingType.Floating:
                     this.Value = ClampValue(val);
@@ -151,10 +151,10 @@ namespace SkiaRate
         private SKColor SKOutlineOnColor { get; set; } = SKColors.Transparent;
         private SKColor SKOutlineOffColor { get; set; } = MaterialColors.Grey;
 
-        private float CalculateValue(double x)
+        private double CalculateValue(double x)
         {
             if (x < this.ItemWidth)
-                return (float)x / this.ItemWidth;
+                return (double)x / this.ItemWidth;
             else if (x < this.ItemWidth + this.Spacing)
                 return 1;
             else

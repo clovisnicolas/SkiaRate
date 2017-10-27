@@ -14,7 +14,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <skiarate:RatingView x:Name="starRatingView" />
-        <skiarate:RatingView x:Name="favRatingView" Grid.Row="1"/>
-        <skiarate:RatingView x:Name="moviesRatingView" Grid.Row="2"/>
+        <skiarate:RatingView x:Name="favRatingView" Count="4" ColorOn="#F44336"  Grid.Row="1"/>
+        <skiarate:RatingView x:Name="moviesRatingView" ColorOn="#3F51B5" Value="2.0"  Grid.Row="2" />
     </Grid>
 </Page>

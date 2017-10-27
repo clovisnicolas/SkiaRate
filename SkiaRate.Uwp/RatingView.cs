@@ -2,6 +2,8 @@
 using SkiaSharp.Views.UWP;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
+using Windows.UI;
+using SkiaSharp;
 
 namespace SkiaRate
 {
@@ -19,18 +21,18 @@ namespace SkiaRate
 
         #region Bindable Properties
 
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(float), typeof(RatingView), new PropertyMetadata(default(float), OnValueChanged));
-        public static readonly DependencyProperty PathProperty = DependencyProperty.Register(nameof(Path), typeof(string), typeof(RatingView), new PropertyMetadata(PathConstants.Star, OnValueChanged));
-        public static readonly DependencyProperty CountProperty = DependencyProperty.Register(nameof(Count), typeof(int), typeof(RatingView), new PropertyMetadata(5, OnValueChanged));
-        public static readonly DependencyProperty OnColorProperty = DependencyProperty.Register(nameof(OnColor), typeof(SKColor), typeof(RatingView), new PropertyMetadata(MaterialColors.Amber, OnValueChanged));
-        public static readonly DependencyProperty OnOutlineColorProperty = DependencyProperty.Register(nameof(OnOutlineColor), typeof(SKColor), typeof(RatingView), new PropertyMetadata(SKColors.Transparent, OnValueChanged));
-        public static readonly DependencyProperty OffOutlineColorProperty = DependencyProperty.Register(nameof(OffOutlineColor), typeof(SKColor), typeof(RatingView), new PropertyMetadata(MaterialColors.Grey, OnValueChanged));
-        public static readonly DependencyProperty RatingTypeProperty = DependencyProperty.Register(nameof(RatingType), typeof(RatingType), typeof(RatingView),new PropertyMetadata(RatingType.Floating, OnValueChanged));
+        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(double), typeof(RatingView), new PropertyMetadata(default(double), OnValueChanged));
+        public static readonly DependencyProperty PathProperty = DependencyProperty.Register(nameof(Path), typeof(string), typeof(RatingView), new PropertyMetadata(PathConstants.Star, OnPropertyChanged));
+        public static readonly DependencyProperty CountProperty = DependencyProperty.Register(nameof(Count), typeof(int), typeof(RatingView), new PropertyMetadata(5, OnPropertyChanged));
+        public static readonly DependencyProperty ColorOnProperty = DependencyProperty.Register(nameof(ColorOn), typeof(SKColor), typeof(RatingView), new PropertyMetadata(MaterialColors.Amber.ToColor(), ColorOnChanged));
+        public static readonly DependencyProperty OutlineOnColorProperty = DependencyProperty.Register(nameof(OnOutlineColor), typeof(SKColor), typeof(RatingView), new PropertyMetadata(SKColors.Transparent, OutlineOnColorChanged));
+        public static readonly DependencyProperty OutlineOffColorProperty = DependencyProperty.Register(nameof(OutlineOffColor), typeof(SKColor), typeof(RatingView), new PropertyMetadata(MaterialColors.Grey.ToColor(), OutlineOffColorChanged));
+        public static readonly DependencyProperty RatingTypeProperty = DependencyProperty.Register(nameof(RatingType), typeof(RatingType), typeof(RatingView),new PropertyMetadata(RatingType.Floating, OnPropertyChanged));
 
-        public float Value
+        public double Value
         {
-            get { return (float)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, this.ClampValue(value)); }
+            get { return (double)GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value); }
         }
 
         public string Path
@@ -45,22 +47,22 @@ namespace SkiaRate
             set { SetValue(CountProperty, value); }
         }
 
-        public SKColor OnColor
+        public Color ColorOn
         {
-            get { return (SKColor)GetValue(OnColorProperty); }
-            set { SetValue(OnColorProperty, value); }
+            get { return (Color)GetValue(ColorOnProperty); }
+            set { SetValue(ColorOnProperty, value); }
         }
 
-        public SKColor OnOutlineColor
+        public Color OnOutlineColor
         {
-            get { return (SKColor)GetValue(OnOutlineColorProperty); }
-            set { SetValue(OnOutlineColorProperty, value); }
+            get { return (Color)GetValue(OutlineOnColorProperty); }
+            set { SetValue(OutlineOnColorProperty, value); }
         }
 
-        public SKColor OffOutlineColor
+        public Color OutlineOffColor
         {
-            get { return (SKColor)GetValue(OffOutlineColorProperty); }
-            set { SetValue(OffOutlineColorProperty, value); }
+            get { return (Color)GetValue(OutlineOffColorProperty); }
+            set { SetValue(OutlineOffColorProperty, value); }
         }
 
         public RatingType RatingType
@@ -73,9 +75,37 @@ namespace SkiaRate
 
         #region Methods
 
-        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as RatingView).Invalidate();
+        }
+
+        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var view = d as RatingView;
+            view.Value = view.ClampValue((double)e.NewValue);
+            OnPropertyChanged(d, e);
+        }
+
+
+        private static void ColorOnChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var view = d as RatingView;
+            view.SKColorOn = ((Color)e.NewValue).ToSKColor();
+            OnPropertyChanged(d, e);
+        }
+
+        private static void OutlineOnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var view = d as RatingView;
+            view.SKOutlineOnColor = ((Color)e.NewValue).ToSKColor();
+            OnPropertyChanged(d, e);
+        }
+        private static void OutlineOffColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var view = d as RatingView;
+            view.SKOutlineOffColor = ((Color)e.NewValue).ToSKColor();
+            OnPropertyChanged(d, e);
         }
 
         private void RatingView_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
