@@ -16,15 +16,14 @@ namespace SkiaRate.Samples.Forms
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var count = float.Parse(parameter as string);
-            var current = (float)value;
+            var count = int.Parse(parameter as string);
+            var current = (double)value;
             var amount = current / count;
-            var res = new SKColor(
+            return new SKColor(
                 (byte)(MinColor.Red + amount * (MaxColor.Red - MinColor.Red)),
                 (byte)(MinColor.Green + amount * (MaxColor.Green - MinColor.Green)),
                 (byte)(MinColor.Blue + amount * (MaxColor.Blue - MinColor.Blue)),
                 (byte)(MinColor.Alpha + amount * (MaxColor.Alpha - MinColor.Alpha))).ToFormsColor();
-            return res;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

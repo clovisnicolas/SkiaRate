@@ -19,7 +19,7 @@ namespace SkiaRate
         #region fields
 
         private nfloat scale = UIScreen.MainScreen.Scale;
-        private float value = 0;
+        private double value = 0;
         private string path = PathConstants.Star;
         private int count = 5;
         private RatingType ratingType = RatingType.Floating;
@@ -28,7 +28,7 @@ namespace SkiaRate
 
         #region properties
 
-        public float Value
+        public double Value
         {
             get { return this.value; }
             set

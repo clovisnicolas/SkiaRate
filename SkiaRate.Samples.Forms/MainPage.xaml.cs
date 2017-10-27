@@ -58,7 +58,7 @@ namespace SkiaRate.Samples.Forms
         private async void UpdateLowBattery()
         {
             float totalTime = 0;
-            var step = 0.02f;
+            var step = 0.12f;
             while (true)
             {
                 await Task.Delay(33);
