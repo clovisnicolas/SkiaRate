@@ -5,18 +5,25 @@
 This library is using SkiaSharp to display a customisable RatingView.
 
 
-# Compatibility
+## Compatibility
 
 * UWP
 * Xamarin.iOS
 * Xamarin.Android
-* Xamarin.Forms¨
+* Xamarin.Forms
 
-# Installation
+## Installation
 
-Available on NuGet soon
+**Xamarin.iOS, Xamarin.Android, UWP, NET Standard 1.3**
 
-# Quickstart
+[![NuGet](https://img.shields.io/nuget/v/SkiaRate.svg?label=NuGet)](https://www.nuget.org/packages/SkiaRate/)
+
+
+**Xamarin.Forms (.NET Standard 1.3)**
+
+[![NuGet](https://img.shields.io/nuget/v/SkiaRate.Forms.svg?label=NuGet)](https://www.nuget.org/packages/SkiaRate.Forms/)
+
+## Quickstart
 
 * UWP
 ```csharp
