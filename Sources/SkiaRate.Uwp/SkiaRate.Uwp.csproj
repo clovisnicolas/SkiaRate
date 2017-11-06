@@ -7,8 +7,8 @@
     <ProjectGuid>{419E707C-0F6A-4AEC-9C9F-D5AAA14D0A96}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SkiaRate.Uwp</RootNamespace>
-    <AssemblyName>SkiaRate.Uwp</AssemblyName>
+    <RootNamespace>SkiaRate</RootNamespace>
+    <AssemblyName>SkiaRate</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.15063.0</TargetPlatformVersion>

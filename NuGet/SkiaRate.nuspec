@@ -18,10 +18,10 @@
   </metadata>
   <files>
       <!-- Android -->
-    <file src="..\Sources\SkiaRate.Droid\bin\Release\SkiaRate.Droid.dll" target="lib\MonoAndroid10\SkiaRate.dll"/>
+    <file src="..\Sources\SkiaRate.Droid\bin\Release\SkiaRate.dll" target="lib\MonoAndroid10\SkiaRate.dll"/>
       <!-- iOS -->
-    <file src="..\Sources\SkiaRate.iOS\bin\Release\SkiaRate.iOS.dll" target="lib\Xamarin.iOS10\SkiaRate.dll"/>
+    <file src="..\Sources\SkiaRate.iOS\bin\Release\SkiaRate.dll" target="lib\Xamarin.iOS10\SkiaRate.dll"/>
       <!-- UWP -->
-    <file src="..\Sources\SkiaRate.Uwp\bin\Release\SkiaRate.Uwp.dll" target="lib\uap\SkiaRate.dll"/>
+    <file src="..\Sources\SkiaRate.Uwp\bin\Release\SkiaRate.dll" target="lib\uap\SkiaRate.dll"/>
 </files>
 </package>
