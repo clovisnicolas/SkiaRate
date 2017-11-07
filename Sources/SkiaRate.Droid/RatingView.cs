@@ -11,6 +11,7 @@ namespace SkiaRate
 {
     public partial class RatingView : SKCanvasView
     {
+        public event EventHandler<EventArgs> ValueChanged;
 
         #region constructors
         public RatingView(Context context) : base(context)
@@ -55,6 +56,7 @@ namespace SkiaRate
                 {
                     this.value = this.ClampValue(value);
                     this.Invalidate();
+                    this.ValueChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
