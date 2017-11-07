@@ -9,6 +9,8 @@ namespace SkiaRate
 {
     public partial class RatingView : SKCanvasView
     {
+        public event EventHandler<EventArgs> ValueChanged;
+
         public RatingView()
         {
             this.BackgroundColor = UIColor.Clear;
@@ -37,6 +39,7 @@ namespace SkiaRate
                 {
                     this.value = this.ClampValue(value);
                     this.SetNeedsDisplayInRect(this.Bounds);
+                    this.ValueChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
